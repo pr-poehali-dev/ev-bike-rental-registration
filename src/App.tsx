@@ -29,6 +29,10 @@ export default function App() {
   const [contractSigned, setContractSigned] = useState(false);
   const [selectedBike, setSelectedBike] = useState<number | null>(null);
   const [filterType, setFilterType] = useState("Все");
+  const [bookingBike, setBookingBike] = useState<typeof bikes[0] | null>(null);
+  const [rentMode, setRentMode] = useState<"hours" | "days">("hours");
+  const [rentHours, setRentHours] = useState(1);
+  const [rentDays, setRentDays] = useState(1);
 
   const goto = (s: Section) => {
     setActiveSection(s);
@@ -503,7 +507,7 @@ export default function App() {
                         </button>
                         <button
                           disabled={!bike.available}
-                          onClick={() => goto("contract")}
+                          onClick={() => { setBookingBike(bike); setRentMode("hours"); setRentHours(1); setRentDays(1); }}
                           className={`flex-1 py-2.5 rounded-xl text-sm font-medium transition-all ${
                             bike.available ? "forest-gradient text-cream hover:opacity-90" : "bg-muted text-muted-foreground cursor-not-allowed"
                           }`}
@@ -778,6 +782,159 @@ export default function App() {
         )}
 
       </main>
+
+      {/* BOOKING MODAL */}
+      {bookingBike && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-forest-900/60 backdrop-blur-sm animate-fade-in">
+          <div className="w-full max-w-md nature-card rounded-2xl shadow-2xl overflow-hidden animate-scale-in">
+            {/* Header */}
+            <div className="bg-forest-700 text-cream px-6 py-4 flex items-center justify-between">
+              <div>
+                <div className="font-display text-xl font-semibold">Выбор срока аренды</div>
+                <div className="text-cream/60 text-sm">{bookingBike.name}</div>
+              </div>
+              <button onClick={() => setBookingBike(null)} className="w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center transition-colors">
+                <Icon name="X" size={16} />
+              </button>
+            </div>
+
+            <div className="p-6 space-y-5">
+              {/* Bike preview */}
+              <div className="flex items-center gap-4 bg-forest-50 rounded-xl p-3">
+                <div className="w-16 h-16 rounded-xl bg-white flex items-center justify-center overflow-hidden flex-shrink-0">
+                  {bookingBike.image ? (
+                    <img src={bookingBike.image} alt={bookingBike.name} className="w-full h-full object-contain p-1" />
+                  ) : (
+                    <span className="text-3xl">{bookingBike.emoji}</span>
+                  )}
+                </div>
+                <div>
+                  <div className="font-semibold text-forest-800">{bookingBike.name}</div>
+                  <div className="text-xs text-muted-foreground">{bookingBike.type} · ⭐ {bookingBike.rating}</div>
+                  <div className="text-xs text-forest-600 mt-0.5">
+                    {bookingBike.price.toLocaleString()} ₽/час
+                    {"priceDay" in bookingBike && bookingBike.priceDay ? ` · ${bookingBike.priceDay.toLocaleString()} ₽/сутки` : ""}
+                  </div>
+                </div>
+              </div>
+
+              {/* Mode toggle */}
+              <div>
+                <div className="text-sm font-medium text-forest-700 mb-2">Тип аренды</div>
+                <div className="grid grid-cols-2 gap-2 bg-forest-100 p-1 rounded-xl">
+                  <button
+                    onClick={() => setRentMode("hours")}
+                    className={`py-2.5 rounded-lg text-sm font-medium transition-all ${rentMode === "hours" ? "bg-white text-forest-800 shadow-sm" : "text-forest-600 hover:text-forest-800"}`}
+                  >
+                    По часам
+                  </button>
+                  <button
+                    onClick={() => setRentMode("days")}
+                    className={`py-2.5 rounded-lg text-sm font-medium transition-all ${rentMode === "days" ? "bg-white text-forest-800 shadow-sm" : "text-forest-600 hover:text-forest-800"}`}
+                  >
+                    По суткам
+                  </button>
+                </div>
+              </div>
+
+              {/* Hours picker */}
+              {rentMode === "hours" && (
+                <div>
+                  <div className="flex items-center justify-between mb-3">
+                    <div className="text-sm font-medium text-forest-700">Количество часов</div>
+                    <div className="font-display text-2xl font-bold text-forest-800">{rentHours} ч</div>
+                  </div>
+                  <input
+                    type="range"
+                    min={1} max={24} value={rentHours}
+                    onChange={(e) => setRentHours(Number(e.target.value))}
+                    className="w-full accent-forest-600"
+                  />
+                  <div className="flex justify-between text-xs text-muted-foreground mt-1">
+                    <span>1 час</span>
+                    <span>6 ч</span>
+                    <span>12 ч</span>
+                    <span>24 ч</span>
+                  </div>
+                  <div className="grid grid-cols-4 gap-2 mt-3">
+                    {[1, 2, 3, 6, 12, 24].map((h) => (
+                      <button
+                        key={h}
+                        onClick={() => setRentHours(h)}
+                        className={`py-1.5 rounded-lg text-xs font-medium border transition-all ${rentHours === h ? "border-forest-600 bg-forest-600 text-cream" : "border-forest-200 text-forest-700 hover:border-forest-400"}`}
+                      >
+                        {h} ч
+                      </button>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              {/* Days picker */}
+              {rentMode === "days" && (
+                <div>
+                  <div className="flex items-center justify-between mb-3">
+                    <div className="text-sm font-medium text-forest-700">Количество суток</div>
+                    <div className="font-display text-2xl font-bold text-forest-800">{rentDays} сут</div>
+                  </div>
+                  <div className="flex items-center gap-3 justify-center">
+                    <button
+                      onClick={() => setRentDays(Math.max(1, rentDays - 1))}
+                      className="w-10 h-10 rounded-full bg-forest-100 text-forest-700 text-xl font-bold hover:bg-forest-200 transition-colors flex items-center justify-center"
+                    >−</button>
+                    <div className="font-display text-5xl font-bold text-forest-800 w-20 text-center">{rentDays}</div>
+                    <button
+                      onClick={() => setRentDays(Math.min(30, rentDays + 1))}
+                      className="w-10 h-10 rounded-full bg-forest-100 text-forest-700 text-xl font-bold hover:bg-forest-200 transition-colors flex items-center justify-center"
+                    >+</button>
+                  </div>
+                  <div className="flex gap-2 mt-3 justify-center">
+                    {[1, 3, 7, 14, 30].map((d) => (
+                      <button
+                        key={d}
+                        onClick={() => setRentDays(d)}
+                        className={`px-3 py-1.5 rounded-lg text-xs font-medium border transition-all ${rentDays === d ? "border-forest-600 bg-forest-600 text-cream" : "border-forest-200 text-forest-700 hover:border-forest-400"}`}
+                      >
+                        {d === 1 ? "1 сут" : d === 7 ? "1 нед" : d === 14 ? "2 нед" : d === 30 ? "1 мес" : `${d} сут`}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              {/* Total */}
+              <div className="bg-gradient-to-r from-forest-700 to-forest-600 rounded-xl p-4 text-cream">
+                <div className="flex items-center justify-between mb-1">
+                  <span className="text-cream/70 text-sm">Итого к оплате</span>
+                  <span className="text-xs text-cream/50">
+                    {rentMode === "hours"
+                      ? `${bookingBike.price.toLocaleString()} ₽ × ${rentHours} ч`
+                      : `${"priceDay" in bookingBike && bookingBike.priceDay ? bookingBike.priceDay.toLocaleString() : (bookingBike.price * 24).toLocaleString()} ₽ × ${rentDays} сут`}
+                  </span>
+                </div>
+                <div className="font-display text-4xl font-bold">
+                  {rentMode === "hours"
+                    ? (bookingBike.price * rentHours).toLocaleString()
+                    : ("priceDay" in bookingBike && bookingBike.priceDay
+                        ? (bookingBike.priceDay * rentDays).toLocaleString()
+                        : (bookingBike.price * 24 * rentDays).toLocaleString())} ₽
+                </div>
+                <div className="text-cream/60 text-xs mt-1">
+                  {rentMode === "hours" ? `Срок: ${rentHours} ${rentHours === 1 ? "час" : rentHours < 5 ? "часа" : "часов"}` : `Срок: ${rentDays} ${rentDays === 1 ? "сутки" : rentDays < 5 ? "суток" : "суток"}`}
+                </div>
+              </div>
+
+              {/* Action */}
+              <button
+                onClick={() => { setBookingBike(null); goto("contract"); }}
+                className="w-full py-4 rounded-xl forest-gradient text-cream font-semibold text-lg hover:opacity-90 transition-opacity"
+              >
+                Перейти к оформлению
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* FOOTER */}
       <footer className="bg-forest-900 text-cream/70 mt-12">
