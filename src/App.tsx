@@ -6,7 +6,7 @@ type Section = "home" | "register" | "verify" | "contract" | "catalog" | "gps" |
 const HERO_IMAGE = "https://cdn.poehali.dev/projects/20efe43b-9ac8-4635-901d-e0b848c858dc/files/d5b25246-0ca0-4b70-b74d-25f57bff3192.jpg";
 
 const bikes = [
-  { id: 1, name: "Горный Explorer", type: "Горный", price: 1000, rating: 4.9, available: true, emoji: "🚵", image: "https://cdn.poehali.dev/projects/20efe43b-9ac8-4635-901d-e0b848c858dc/bucket/b23b91dc-e110-450a-98ac-e4b9071ac5ec.JPG" },
+  { id: 1, name: "Горный Explorer", type: "Горный", price: 1000, priceDay: 6000, rating: 4.9, available: true, emoji: "🚵", image: "https://cdn.poehali.dev/projects/20efe43b-9ac8-4635-901d-e0b848c858dc/bucket/b23b91dc-e110-450a-98ac-e4b9071ac5ec.JPG" },
   { id: 2, name: "Городской Breeze", type: "Городской", price: 200, rating: 4.7, available: true, emoji: "🚲" },
   { id: 3, name: "Электро EcoRide", type: "Электрический", price: 500, rating: 4.8, available: true, emoji: "⚡" },
   { id: 4, name: "Детский Sprout", type: "Детский", price: 150, rating: 5.0, available: false, emoji: "🌿" },
@@ -484,8 +484,15 @@ export default function App() {
                         <h3 className="font-display text-xl font-semibold text-forest-800">{bike.name}</h3>
                         <span className="text-xs bg-forest-100 text-forest-700 px-2 py-0.5 rounded-full">{bike.type}</span>
                       </div>
-                      <div className="text-2xl font-bold text-forest-700 mb-4">
-                        {bike.price} ₽<span className="text-sm font-normal text-muted-foreground">/час</span>
+                      <div className="flex items-end gap-3 mb-4">
+                        <div className="text-2xl font-bold text-forest-700">
+                          {bike.price} ₽<span className="text-sm font-normal text-muted-foreground">/час</span>
+                        </div>
+                        {"priceDay" in bike && bike.priceDay && (
+                          <div className="text-sm font-medium text-earth-600 bg-earth-50 px-2 py-0.5 rounded-lg border border-earth-200">
+                            {bike.priceDay.toLocaleString()} ₽/сутки
+                          </div>
+                        )}
                       </div>
                       <div className="flex gap-2">
                         <button
