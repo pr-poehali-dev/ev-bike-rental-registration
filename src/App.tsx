@@ -6,7 +6,7 @@ type Section = "home" | "register" | "verify" | "contract" | "catalog" | "gps" |
 const HERO_IMAGE = "https://cdn.poehali.dev/projects/20efe43b-9ac8-4635-901d-e0b848c858dc/files/d5b25246-0ca0-4b70-b74d-25f57bff3192.jpg";
 
 const bikes = [
-  { id: 1, name: "Горный Explorer", type: "Горный", price: 350, rating: 4.9, available: true, emoji: "🚵" },
+  { id: 1, name: "Горный Explorer", type: "Горный", price: 350, rating: 4.9, available: true, emoji: "🚵", image: "https://cdn.poehali.dev/projects/20efe43b-9ac8-4635-901d-e0b848c858dc/bucket/b23b91dc-e110-450a-98ac-e4b9071ac5ec.JPG" },
   { id: 2, name: "Городской Breeze", type: "Городской", price: 200, rating: 4.7, available: true, emoji: "🚲" },
   { id: 3, name: "Электро EcoRide", type: "Электрический", price: 500, rating: 4.8, available: true, emoji: "⚡" },
   { id: 4, name: "Детский Sprout", type: "Детский", price: 150, rating: 5.0, available: false, emoji: "🌿" },
@@ -464,8 +464,12 @@ export default function App() {
                 .filter((b) => filterType === "Все" || b.type === filterType)
                 .map((bike, i) => (
                   <div key={bike.id} className="nature-card rounded-2xl overflow-hidden hover:shadow-xl transition-all duration-300 hover:-translate-y-1 group" style={{ animationDelay: `${i * 0.1}s` }}>
-                    <div className="h-44 bg-gradient-to-br from-forest-100 to-moss-100 flex items-center justify-center relative">
-                      <span className="text-7xl group-hover:scale-110 transition-transform duration-300">{bike.emoji}</span>
+                    <div className="h-44 bg-gradient-to-br from-forest-100 to-moss-100 flex items-center justify-center relative overflow-hidden">
+                      {bike.image ? (
+                        <img src={bike.image} alt={bike.name} className="w-full h-full object-contain p-2 group-hover:scale-105 transition-transform duration-300" />
+                      ) : (
+                        <span className="text-7xl group-hover:scale-110 transition-transform duration-300">{bike.emoji}</span>
+                      )}
                       {!bike.available && (
                         <div className="absolute inset-0 bg-foreground/20 backdrop-blur-sm flex items-center justify-center">
                           <span className="bg-foreground/70 text-background px-3 py-1 rounded-full text-sm font-medium">Занят</span>
