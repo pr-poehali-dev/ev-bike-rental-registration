@@ -6,7 +6,7 @@ type Section = "home" | "register" | "verify" | "contract" | "catalog" | "gps" |
 const HERO_IMAGE = "https://cdn.poehali.dev/projects/20efe43b-9ac8-4635-901d-e0b848c858dc/files/d5b25246-0ca0-4b70-b74d-25f57bff3192.jpg";
 
 const bikes = [
-  { id: 1, name: "Горный Explorer", type: "Горный", price: 350, rating: 4.9, available: true, emoji: "🚵", image: "https://cdn.poehali.dev/projects/20efe43b-9ac8-4635-901d-e0b848c858dc/bucket/b23b91dc-e110-450a-98ac-e4b9071ac5ec.JPG" },
+  { id: 1, name: "Горный Explorer", type: "Горный", price: 1000, rating: 4.9, available: true, emoji: "🚵", image: "https://cdn.poehali.dev/projects/20efe43b-9ac8-4635-901d-e0b848c858dc/bucket/b23b91dc-e110-450a-98ac-e4b9071ac5ec.JPG" },
   { id: 2, name: "Городской Breeze", type: "Городской", price: 200, rating: 4.7, available: true, emoji: "🚲" },
   { id: 3, name: "Электро EcoRide", type: "Электрический", price: 500, rating: 4.8, available: true, emoji: "⚡" },
   { id: 4, name: "Детский Sprout", type: "Детский", price: 150, rating: 5.0, available: false, emoji: "🌿" },
