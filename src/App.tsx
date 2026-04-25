@@ -6,12 +6,12 @@ type Section = "home" | "register" | "verify" | "contract" | "catalog" | "gps" |
 const HERO_IMAGE = "https://cdn.poehali.dev/projects/20efe43b-9ac8-4635-901d-e0b848c858dc/files/d5b25246-0ca0-4b70-b74d-25f57bff3192.jpg";
 
 const bikes = [
-  { id: 1, name: "Горный Explorer", type: "Горный", price: 1000, priceDay: 6000, rating: 4.9, available: true, emoji: "🚵", image: "https://cdn.poehali.dev/projects/20efe43b-9ac8-4635-901d-e0b848c858dc/bucket/b23b91dc-e110-450a-98ac-e4b9071ac5ec.JPG" },
-  { id: 2, name: "Городской Breeze", type: "Городской", price: 200, rating: 4.7, available: true, emoji: "🚲" },
-  { id: 3, name: "Электро EcoRide", type: "Электрический", price: 500, rating: 4.8, available: true, emoji: "⚡" },
-  { id: 4, name: "Детский Sprout", type: "Детский", price: 150, rating: 5.0, available: false, emoji: "🌿" },
-  { id: 5, name: "Складной Compact", type: "Складной", price: 280, rating: 4.6, available: true, emoji: "🌱" },
-  { id: 6, name: "Шоссейный Swift", type: "Шоссейный", price: 420, rating: 4.8, available: true, emoji: "🍃" },
+  { id: 1, name: "Горный Explorer", type: "Внедорожный", price: 1000, priceDay: 6000, rating: 4.9, available: true, emoji: "⚡", image: "https://cdn.poehali.dev/projects/20efe43b-9ac8-4635-901d-e0b848c858dc/bucket/b23b91dc-e110-450a-98ac-e4b9071ac5ec.JPG" },
+  { id: 2, name: "City Volt", type: "Городской", price: 400, rating: 4.7, available: true, emoji: "🛵" },
+  { id: 3, name: "EcoRide Pro", type: "Спортивный", price: 700, rating: 4.8, available: true, emoji: "⚡" },
+  { id: 4, name: "Mini Spark", type: "Компактный", price: 300, rating: 5.0, available: false, emoji: "🌿" },
+  { id: 5, name: "Fold & Go", type: "Складной", price: 450, rating: 4.6, available: true, emoji: "🌱" },
+  { id: 6, name: "Speed Storm", type: "Спортивный", price: 800, rating: 4.8, available: true, emoji: "🍃" },
 ];
 
 const navItems = [
@@ -47,7 +47,7 @@ export default function App() {
         <div className="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between">
           <button onClick={() => goto("home")} className="flex items-center gap-2 group">
             <div className="w-8 h-8 rounded-full forest-gradient flex items-center justify-center text-sm">🌿</div>
-            <span className="font-display text-xl font-semibold text-forest-700">ВелоПрокат</span>
+            <span className="font-display text-xl font-semibold text-forest-700">МотоПрокат</span>
           </button>
 
           <div className="hidden md:flex items-center gap-1">
@@ -126,7 +126,7 @@ export default function App() {
                 <div className="max-w-2xl">
                   <div className="inline-flex items-center gap-2 bg-white/10 backdrop-blur rounded-full px-4 py-2 mb-6 text-cream/90 text-sm animate-fade-in opacity-0-init">
                     <span className="w-2 h-2 rounded-full bg-moss-300 animate-pulse-soft" />
-                    Экологичный транспорт города
+                    Экологичный электротранспорт города
                   </div>
                   <h1 className="font-display text-5xl md:text-7xl font-bold text-cream mb-6 leading-tight text-shadow-forest animate-fade-in opacity-0-init animate-delay-100">
                     Свобода <br />
@@ -134,7 +134,7 @@ export default function App() {
                     с природой
                   </h1>
                   <p className="text-cream/80 text-lg mb-8 leading-relaxed animate-fade-in opacity-0-init animate-delay-200">
-                    Аренда велосипедов с умной верификацией, GPS-трекингом <br className="hidden md:block"/>
+                    Аренда электробайков с умной верификацией, GPS-трекингом <br className="hidden md:block"/>
                     и цифровым договором. Просто, безопасно, экологично.
                   </p>
                   <div className="flex flex-wrap gap-4 animate-fade-in opacity-0-init animate-delay-300">
@@ -142,7 +142,7 @@ export default function App() {
                       onClick={() => goto("catalog")}
                       className="px-8 py-4 rounded-xl forest-gradient text-cream font-semibold text-lg hover:opacity-90 transition-all hover:scale-105 shadow-lg shadow-forest-900/30"
                     >
-                      Выбрать велосипед
+                      Выбрать электробайк
                     </button>
                     <button
                       onClick={() => goto("register")}
@@ -162,7 +162,7 @@ export default function App() {
             <section className="py-12 bg-forest-800 text-cream">
               <div className="max-w-6xl mx-auto px-6 grid grid-cols-2 md:grid-cols-4 gap-8">
                 {[
-                  { num: "1 200+", label: "Велосипедов" },
+                  { num: "1 200+", label: "Электробайков" },
                   { num: "48 000", label: "Поездок в месяц" },
                   { num: "98%", label: "Довольных клиентов" },
                   { num: "0 г CO₂", label: "Выбросов" },
@@ -177,17 +177,17 @@ export default function App() {
 
             <section className="py-20 max-w-6xl mx-auto px-6">
               <div className="text-center mb-14">
-                <h2 className="font-display text-4xl md:text-5xl font-semibold text-forest-800 mb-4">Почему ВелоПрокат?</h2>
-                <p className="text-muted-foreground text-lg max-w-xl mx-auto">Удобный сервис с заботой о природе и вашей безопасности</p>
+                <h2 className="font-display text-4xl md:text-5xl font-semibold text-forest-800 mb-4">Почему МотоПрокат?</h2>
+                <p className="text-muted-foreground text-lg max-w-xl mx-auto">Удобный сервис аренды электробайков с заботой о природе и вашей безопасности</p>
               </div>
               <div className="grid md:grid-cols-3 gap-6">
                 {[
                   { icon: "ScanFace", title: "Верификация личности", desc: "Распознавание лица и сканирование паспорта — быстро и безопасно", color: "forest" },
-                  { icon: "MapPin", title: "GPS-трекинг", desc: "Отслеживайте велосипед в реальном времени прямо в приложении", color: "earth" },
+                  { icon: "MapPin", title: "GPS-трекинг", desc: "Отслеживайте электробайк в реальном времени прямо в приложении", color: "earth" },
                   { icon: "FileText", title: "Цифровой договор", desc: "Подпишите договор онлайн — никакой бумажной волокиты", color: "moss" },
                   { icon: "Leaf", title: "Экологично", desc: "Ноль выбросов CO₂ — вклад в чистый воздух города", color: "forest" },
-                  { icon: "Shield", title: "Страховка включена", desc: "Каждый велосипед застрахован, вы защищены", color: "earth" },
-                  { icon: "Clock", title: "Аренда 24/7", desc: "Бери велосипед в любое время, возвращай когда удобно", color: "moss" },
+                  { icon: "Shield", title: "Страховка включена", desc: "Каждый электробайк застрахован, вы защищены", color: "earth" },
+                  { icon: "Clock", title: "Аренда 24/7", desc: "Бери электробайк в любое время, возвращай когда удобно", color: "moss" },
                 ].map((f) => (
                   <div key={f.title} className="nature-card rounded-2xl p-6 hover:shadow-lg transition-all duration-300 hover:-translate-y-1">
                     <div className={`w-12 h-12 rounded-xl flex items-center justify-center mb-4 ${
@@ -208,7 +208,7 @@ export default function App() {
               <div className="max-w-2xl mx-auto px-6">
                 <div className="text-5xl mb-4">🌿</div>
                 <h2 className="font-display text-4xl md:text-5xl font-bold mb-4">Готов к поездке?</h2>
-                <p className="text-cream/70 text-lg mb-8">Зарегистрируйся за 2 минуты и бери велосипед уже сегодня</p>
+                <p className="text-cream/70 text-lg mb-8">Зарегистрируйся за 2 минуты и бери электробайк уже сегодня</p>
                 <div className="flex flex-wrap justify-center gap-4">
                   <button onClick={() => goto("register")} className="px-8 py-4 bg-cream text-forest-800 rounded-xl font-semibold hover:bg-white transition-colors">
                     Начать сейчас
@@ -433,7 +433,7 @@ export default function App() {
                       <h3 className="font-display text-2xl font-bold text-forest-800 mb-1">Договор подписан!</h3>
                       <p className="text-muted-foreground text-sm mb-4">Копия отправлена на вашу почту</p>
                       <button onClick={() => goto("catalog")} className="px-8 py-3 rounded-xl forest-gradient text-cream font-semibold hover:opacity-90 transition-opacity">
-                        Выбрать велосипед
+                        Выбрать электробайк
                       </button>
                     </div>
                   )}
@@ -447,11 +447,11 @@ export default function App() {
         {activeSection === "catalog" && (
           <div className="py-16 max-w-6xl mx-auto px-6">
             <div className="text-center mb-10">
-              <h1 className="font-display text-4xl md:text-5xl font-bold text-forest-800 mb-3">Каталог велосипедов</h1>
-              <p className="text-muted-foreground text-lg">Найдите идеальный велосипед для вашей поездки</p>
+              <h1 className="font-display text-4xl md:text-5xl font-bold text-forest-800 mb-3">Каталог электробайков</h1>
+              <p className="text-muted-foreground text-lg">Найдите идеальный электробайк для вашей поездки</p>
             </div>
             <div className="flex flex-wrap gap-2 mb-8 justify-center">
-              {["Все", "Горный", "Городской", "Электрический", "Детский", "Складной", "Шоссейный"].map((type) => (
+              {["Все", "Внедорожный", "Городской", "Спортивный", "Компактный", "Складной"].map((type) => (
                 <button
                   key={type}
                   onClick={() => setFilterType(type)}
@@ -592,7 +592,7 @@ export default function App() {
                   <h3 className="font-display text-lg font-semibold text-forest-800 mb-4">Статус поездки</h3>
                   <div className="space-y-3">
                     {[
-                      { icon: "Bike", label: "Велосипед", value: "Горный Explorer" },
+                      { icon: "Zap", label: "Электробайк", value: "Горный Explorer" },
                       { icon: "Clock", label: "Время в пути", value: "1ч 23 мин" },
                       { icon: "Route", label: "Пройдено", value: "12.4 км" },
                       { icon: "Battery", label: "Заряд GPS", value: "87%" },
@@ -683,9 +683,9 @@ export default function App() {
                 <h3 className="font-display text-xl font-semibold text-forest-800 mb-4">Последние поездки</h3>
                 <div className="space-y-3">
                   {[
-                    { date: "24 апр", bike: "Горный Explorer", km: "8.2 км", price: "700 ₽" },
-                    { date: "22 апр", bike: "Городской Breeze", km: "5.1 км", price: "400 ₽" },
-                    { date: "20 апр", bike: "Электро EcoRide", km: "12.7 км", price: "1 500 ₽" },
+                    { date: "24 апр", bike: "Горный Explorer", km: "8.2 км", price: "1 000 ₽" },
+                    { date: "22 апр", bike: "City Volt", km: "5.1 км", price: "800 ₽" },
+                    { date: "20 апр", bike: "EcoRide Pro", km: "12.7 км", price: "2 100 ₽" },
                   ].map((r, i) => (
                     <div key={i} className="flex items-center gap-3 py-2 border-b border-forest-100 last:border-0">
                       <div className="w-8 h-8 rounded-full bg-forest-100 flex items-center justify-center text-sm">🚲</div>
@@ -765,10 +765,10 @@ export default function App() {
                 <h3 className="font-display text-2xl font-semibold text-forest-800 mb-5">Частые вопросы</h3>
                 <div className="space-y-4">
                   {[
-                    { q: "Как взять велосипед в аренду?", a: "Зарегистрируйтесь, пройдите верификацию, выберите велосипед в каталоге и подпишите договор онлайн." },
+                    { q: "Как взять электробайк в аренду?", a: "Зарегистрируйтесь, пройдите верификацию, выберите электробайк в каталоге и подпишите договор онлайн." },
                     { q: "Что делать при поломке?", a: "Позвоните на горячую линию 8-800-123-45-67 или нажмите «Сообщить о проблеме» в разделе GPS-трекинг." },
-                    { q: "Как работает GPS?", a: "Каждый велосипед оснащён трекером. Вы видите положение в реальном времени в разделе GPS." },
-                    { q: "Как вернуть залог?", a: "Залог возвращается автоматически на карту в течение 3 рабочих дней после возврата велосипеда." },
+                    { q: "Как работает GPS?", a: "Каждый электробайк оснащён трекером. Вы видите положение в реальном времени в разделе GPS." },
+                    { q: "Как вернуть залог?", a: "Залог возвращается автоматически на карту в течение 3 рабочих дней после возврата электробайка." },
                   ].map((faq, i) => (
                     <div key={i} className="border-b border-forest-100 last:border-0 pb-3 last:pb-0">
                       <div className="text-sm font-semibold text-forest-800 mb-1">{faq.q}</div>
@@ -943,9 +943,9 @@ export default function App() {
             <div>
               <div className="flex items-center gap-2 mb-3">
                 <div className="w-7 h-7 rounded-full bg-moss-400 flex items-center justify-center text-sm">🌿</div>
-                <span className="font-display text-lg text-cream font-semibold">ВелоПрокат</span>
+                <span className="font-display text-lg text-cream font-semibold">МотоПрокат</span>
               </div>
-              <p className="text-sm leading-relaxed">Экологичная аренда велосипедов с умной верификацией и GPS-трекингом</p>
+              <p className="text-sm leading-relaxed">Экологичная аренда электробайков с умной верификацией и GPS-трекингом</p>
             </div>
             {[
               { title: "Сервис", links: ["Каталог", "GPS-трекинг", "Тарифы", "Страховка"] },
@@ -964,7 +964,7 @@ export default function App() {
           </div>
           <div className="leaf-divider mb-6" />
           <div className="flex flex-col md:flex-row justify-between items-center gap-3 text-xs">
-            <span>© 2025 ВелоПрокат. Все права защищены.</span>
+            <span>© 2025 МотоПрокат. Все права защищены.</span>
             <span className="flex items-center gap-1">
               <Icon name="Leaf" size={12} className="text-moss-400" />
               Сделано с заботой о природе
